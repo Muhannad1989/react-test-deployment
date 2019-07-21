@@ -1,0 +1,46 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: whitesmoke;
+  color: black;
+}
+
+.container {
+  /* display: flex;
+  justify-content: center; */
+}
+
+.button_div {
+  padding: 5px;
+  border: 1px solid gray;
+  width: 600px;
+  margin: 10 auto;
+}
+
+.right {
+  width: 300px;
+}
+.left {
+  width: 300px;
+}
+ul {
+  width: 220px;
+  margin: 0 auto;
+  list-style: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.loading {
+  font-size: 25px;
+}
+.error {
+  font-size: 25px;
+  color: #cd0046;
+}
