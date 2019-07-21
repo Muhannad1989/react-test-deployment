@@ -5,8 +5,9 @@
 }
 
 body {
-  background-color: whitesmoke;
+  background-color: white;
   color: black;
+  font-family: Arial;
 }
 
 .container {
@@ -14,23 +15,49 @@ body {
   justify-content: center; */
 }
 
-.button_div {
+.navbar {
   padding: 5px;
-  border: 1px solid gray;
-  width: 600px;
-  margin: 10 auto;
+  margin: 0 auto;
+  width: 800px;
+  background: #fff;
+  -webkit-box-shadow: 0 1px 2px 0 #d3d3d3;
+  box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
+  padding: 1em 1em;
+  border-radius: 0.28571429rem;
+  border: 1px solid rgba(34, 36, 38, 0.15);
 }
 
-.right {
-  width: 300px;
+.parent {
+  display: flex;
+  justify-content: space-between;
+  width: 800px;
+  margin: 0 auto;
 }
-.left {
-  width: 300px;
+.users {
+  width: 30%;
+  font-size: 18px;
+  padding: 5px;
+}
+
+.details {
+  width: 55%;
+  font-size: 18px;
+  padding: 5px;
+  height: 450px;
 }
 ul {
-  width: 220px;
-  margin: 0 auto;
   list-style: none;
+  border: 1px solid #d3d3d3;
+  padding: 5px;
+  box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
+}
+
+img {
+  margin: 10px 0px;
+}
+
+.name {
+  background: #cd0046;
 }
 
 .hidden {

@@ -1,28 +1,34 @@
 import React, { Component } from 'react';
 
-// const Child = ({ index, item }) => {
-//   return (
-//     <React.Fragment>
-//       <li>{item.name}</li>
-//     </React.Fragment>
-//   );
-// };
-
-// const Item = props => {
-//   return (
-//     <React.Fragment>
-//       <li>{props.name}</li>
-//     </React.Fragment>
-//   );
-// };
-
-const List = ({ photo, surname, gender, region }) => {
+const User = ({ name, index, displayDetails, user: selectedUser }) => {
   return (
     <React.Fragment>
-      <img src={photo} alt="Smiley face" />
-      <li>surname :{surname}</li>
-      <li>gender :{gender}</li>
-      <li>region : {region}</li>
+      <p
+        key={index}
+        onClick={() => {
+          displayDetails(selectedUser);
+        }}
+      >
+        {name}
+      </p>
+    </React.Fragment>
+  );
+};
+
+const List = ({ surname, gender, region }) => {
+  return (
+    <ul>
+      <li>{surname}</li>
+      <li>{gender}</li>
+      <li>{region}</li>
+    </ul>
+  );
+};
+
+const Image = ({ photo }) => {
+  return (
+    <React.Fragment>
+      <img src={photo} alt="" />
     </React.Fragment>
   );
 };
@@ -30,11 +36,11 @@ const List = ({ photo, surname, gender, region }) => {
 class Users extends Component {
   state = {
     data: [],
+    user: [],
     error: false,
     loading: false,
     selectedIndex: null,
     showBox: false,
-    displayAll: false,
   };
 
   showBox = () => {
@@ -52,14 +58,8 @@ class Users extends Component {
       });
   };
 
-  displayDetails = index => {
-    this.state.selectedIndex === null
-      ? this.setState({ selectedIndex: index })
-      : this.setState({ selectedIndex: null });
-  };
-
-  showForm = () => {
-    this.setState({ showForm: true });
+  displayDetails = user => {
+    this.setState({ user });
   };
 
   render() {
@@ -72,48 +72,36 @@ class Users extends Component {
       return <div className="error">Opps something went wrong</div>;
     }
     return (
-      <React.Fragment>
-        <div className="button_div">
+      <div className="container">
+        <div className="navbar">
           <button onClick={this.getData}>Get Users</button>
         </div>
-
-        <ul>
-          {data.map((item, index) => {
-            return (
-              <React.Fragment>
-                <div className="container">
-                  <div className="right" />
-                  <ul>
-                    <li
-                      className="parent"
-                      key={index}
-                      onClick={() => {
-                        this.displayDetails(index);
-                      }}
-                    >
-                      {item.name}
-                    </li>
-                  </ul>
-
-                  {index === selectedIndex ? (
-                    <div className="left">
-                      {/* <List /> could use this one instead the list bottom */}
-                      <ul>
-                        <img src={item.photo} alt="Smiley face" />
-                        <li>surname :{item.surname}</li>
-                        <li>gender :{item.gender}</li>
-                        <li>region : {item.region}</li>
-                      </ul>
-                    </div>
-                  ) : null}
-                  <div />
+        <div className="parent">
+          <div className="details">
+            <Image photo={this.state.user.photo} />
+            <List
+              surname={this.state.user.surname}
+              region={this.state.user.region}
+              gender={this.state.user.gender}
+            />
+          </div>
+          <div className="users">
+            {data.map((item, index) => {
+              return (
+                <div>
+                  <User
+                    key={index}
+                    name={item.name}
+                    user={item}
+                    index={index}
+                    displayDetails={this.displayDetails}
+                  />
                 </div>
-              </React.Fragment>
-            );
-          })}
-        </ul>
-        <div />
-      </React.Fragment>
+              );
+            })}
+          </div>
+        </div>
+      </div>
     );
   }
 }
