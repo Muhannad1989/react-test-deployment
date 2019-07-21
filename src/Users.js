@@ -39,12 +39,6 @@ class Users extends Component {
     user: [],
     error: false,
     loading: false,
-    selectedIndex: null,
-    showBox: false,
-  };
-
-  showBox = () => {
-    this.setState({ showBox: true });
   };
 
   getData = () => {
@@ -63,7 +57,7 @@ class Users extends Component {
   };
 
   render() {
-    const { loading, error, data, selectedIndex } = this.state;
+    const { loading, error, data } = this.state;
     if (loading) {
       return <div className="loading">Loading...</div>;
     }
