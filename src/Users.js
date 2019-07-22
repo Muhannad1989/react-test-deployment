@@ -18,9 +18,11 @@ const User = ({ name, index, displayDetails, user: selectedUser }) => {
 const List = ({ surname, gender, region }) => {
   return (
     <ul>
-      <li>{surname}</li>
-      <li>{gender}</li>
-      <li>{region}</li>
+      <li>
+        <span>{surname}</span>
+      </li>
+      <li>Gender: {gender}</li>
+      <li>Country of origin: {region}</li>
     </ul>
   );
 };
@@ -71,14 +73,17 @@ class Users extends Component {
           <button onClick={this.getData}>Get Users</button>
         </div>
         <div className="parent">
-          <div className="details">
-            <Image photo={this.state.user.photo} />
-            <List
-              surname={this.state.user.surname}
-              region={this.state.user.region}
-              gender={this.state.user.gender}
-            />
-          </div>
+          {data.length > 0 ? (
+            <div className="details">
+              <Image photo={this.state.user.photo} />
+              <List
+                surname={this.state.user.surname}
+                region={this.state.user.region}
+                gender={this.state.user.gender}
+              />
+            </div>
+          ) : null}
+
           <div className="users">
             {data.map((item, index) => {
               return (
