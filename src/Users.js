@@ -1,20 +1,5 @@
 import React, { Component } from 'react';
 
-const User = ({ name, index, displayDetails, user: selectedUser }) => {
-  return (
-    <React.Fragment>
-      <p
-        key={index}
-        onClick={() => {
-          displayDetails(selectedUser);
-        }}
-      >
-        {name}
-      </p>
-    </React.Fragment>
-  );
-};
-
 const List = ({ surname, gender, region }) => {
   return (
     <ul>
@@ -35,12 +20,27 @@ const Image = ({ photo }) => {
   );
 };
 
+const User = ({ name, index, displayDetails, user: selectedUser }) => {
+  return (
+    <React.Fragment>
+      <p
+        onClick={() => {
+          displayDetails(selectedUser);
+        }}
+      >
+        {name}
+      </p>
+    </React.Fragment>
+  );
+};
+
 class Users extends Component {
   state = {
     data: [],
     user: [],
     error: false,
     loading: false,
+    displayBox: false,
   };
 
   getData = () => {
@@ -55,7 +55,7 @@ class Users extends Component {
   };
 
   displayDetails = user => {
-    this.setState({ user });
+    this.setState({ user, displayBox: true });
   };
 
   render() {
@@ -73,23 +73,24 @@ class Users extends Component {
           <button onClick={this.getData}>Get Users</button>
         </div>
         <div className="parent">
-          {data.length > 0 ? (
-            <div className="details">
-              <Image photo={this.state.user.photo} />
-              <List
-                surname={this.state.user.surname}
-                region={this.state.user.region}
-                gender={this.state.user.gender}
-              />
-            </div>
-          ) : null}
+          <div>
+            {this.state.displayBox > false ? (
+              <div className="details">
+                <Image photo={this.state.user.photo} />
+                <List
+                  surname={this.state.user.surname}
+                  region={this.state.user.region}
+                  gender={this.state.user.gender}
+                />
+              </div>
+            ) : null}
+          </div>
 
           <div className="users">
             {data.map((item, index) => {
               return (
-                <div>
+                <div key={index}>
                   <User
-                    key={index}
                     name={item.name}
                     user={item}
                     index={index}

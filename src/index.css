@@ -46,6 +46,9 @@ p {
   border-bottom: 1px solid rgba(34, 36, 38, 0.15);
   padding: 4px;
 }
+p:hover {
+  cursor: pointer;
+}
 
 .details {
   width: 55%;
